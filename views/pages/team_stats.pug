@@ -1,0 +1,41 @@
+//- team_stats.pug
+include ../partials/header.pug
+include ../partials/menu.pug
+
+div.container
+  br
+  div.jumbotron
+    h1.display-4 Fall 2018 Football Stats
+
+
+  table.table.table-bordered#stats_table
+    tr
+      th.align-bottom(rowspan="2") Game Date
+      th.align-bottom(rowspan="2") Visiting Team Name
+      th.text-center(colspan="2") Score
+      th.align-bottom(rowspan="2") Winner
+    tr
+      th Home Score
+      th Visitor Score
+      form(action="/team_stats", method="get")
+        for i in games
+          tr
+          td= i.game_date
+            td= i.visitor_name
+            td= i.home_score
+            td= i.visitor_score
+            if(i.home_score > i.visitor_score)
+              td= "Buffs!"
+            else
+              td= i.visitor_name
+  br
+
+  table.table.text-center
+    tr
+      th Wins
+      th Losses
+    tr
+      td= wins
+      td= losses
+
+include ../partials/footer.pug
